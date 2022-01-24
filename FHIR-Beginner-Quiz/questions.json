@@ -1,0 +1,536 @@
+﻿{
+  "resourceType": "Questionnaire",
+  "title": "Accreditation Exam for Primary System Analyst of Medical Informatics Standards",
+  "status": "draft",
+  "subjectType": [
+    "Patient"
+  ],
+  "date": "2022-01-25",
+  "publisher": "MITW",
+  "effectivePeriod": {
+    "start": "2022-01-29",
+    "end": "2022-01-29"
+  },
+  "item": [
+    {
+      "linkId": "1",
+      "prefix": "1. ",
+      "text": "What does FHIR stand for?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Fast Healthcare Internet Resource" },
+        { "valueString": "B.\t Fast Healthcare Interoperability Resource" },
+        { "valueString": "C.\t Fast Healthcare Introduction Resource" },
+        { "valueString": "D.\t Fast Healthcare Internet Record" }
+      ]
+    },
+    {
+      "linkId": "2",
+      "prefix": "2. ",
+      "text": "Which organization developed the FHIR standard?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Medical Image Standards Association of Taiwan (MISAT)" },
+        { "valueString": "B.\t HL7 International" },
+        { "valueString": "C.\t Tzu Chi University" },
+        { "valueString": "D.\t DICOM Group" }
+      ]
+    },
+    {
+      "linkId": "3",
+      "prefix": "3. ",
+      "text": "Which is not a FHIR resource?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Patient" },
+        { "valueString": "B.\t Organization" },
+        { "valueString": "C.\t Observation" },
+        { "valueString": "D.\t Practice" }
+      ]
+    },
+    {
+      "linkId": "4",
+      "prefix": "4. ",
+      "text": "Which country has started to adopt FHIR as a standard for exchanging electronic health information by MISAT?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Taiwan" },
+        { "valueString": "B.\t Indonesia" },
+        { "valueString": "C.\t UK" },
+        { "valueString": "D.\t Malaysia" }
+      ]
+    },
+    {
+      "linkId": "5",
+      "prefix": "5. ",
+      "text": "Which is not the advantage of FHIR?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t FHIR can improve interoperability and integration of patient's data between different hospital" },
+        { "valueString": "B.\t FHIR is easy to implement by IT developers" },
+        { "valueString": "C.\t FHIR equipped with high security protocol" },
+        { "valueString": "D.\t FHIR is flexible since FHIR data field is not fixed" }
+      ]
+    },
+    {
+      "linkId": "6",
+      "prefix": "6. ",
+      "text": "FHIR implements many modern web technologies that developers are already familiar with. Which of the following is not web technologies implemented by FHIR?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t CSV" },
+        { "valueString": "B.\t JSON" },
+        { "valueString": "C.\t XML" },
+        { "valueString": "D.\t REST API" }
+      ]
+    },
+    {
+      "linkId": "7",
+      "prefix": "7. ",
+      "text": "Which is not the characteristic of FHIR?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Patient resource can use “reference” field to link to Organization resource" },
+        { "valueString": "B.\t All fields defined by FHIR are the searchable parameters" },
+        { "valueString": "C.\t FHIR is a medical information exchange standard" },
+        { "valueString": "D.\t FHIR resource have defined its field’s data type and restriction in a detailed document" }
+      ]
+    },
+    {
+      "linkId": "8",
+      "prefix": "8. ",
+      "text": "Which description is false?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t FHIR can use HTTP Post method to create new patient information" },
+        { "valueString": "B.\t FHIR defines vocabulary, interoperability API, information security specifications" },
+        { "valueString": "C.\t The “telecom” field of FHIR Patient can store multiple mobile phone numbers or emails" },
+        { "valueString": "D.\t The “reference” field of the FHIR resource can only connect to one resource" }
+      ]
+    },
+    {
+      "linkId": "9",
+      "prefix": "9. ",
+      "text": "“Patients who see multiple doctors from different hospitals might no longer have to worry about having multiple patient portals from each hospital. One single patient portal, which integrates data from different hospitals that use the FHIR standard could integrate patient information from the disparate systems to improve care coordination.”\nThe paragraph above shows one of the FHIR advantages in the category of?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Security" },
+        { "valueString": "B.\t Interoperability" },
+        { "valueString": "C.\t Sustainability" },
+        { "valueString": "D.\t Responsibility" }
+      ]
+    },
+    {
+      "linkId": "10",
+      "prefix": "10. ",
+      "text": "Which domain does the FHIR standard mainly focus on?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Tourism" },
+        { "valueString": "B.\t Business" },
+        { "valueString": "C.\t Law" },
+        { "valueString": "D.\t Medical" }
+      ]
+    },
+    {
+      "linkId": "11",
+      "prefix": "11. ",
+      "text": "Which is the full name of JSON?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t JavaScript Observation Note" },
+        { "valueString": "B.\t JavaScIpt Object Notation" },
+        { "valueString": "C.\t JavaScript Object Notation" },
+        { "valueString": "D.\t JavaScript Observation Notation" }
+      ]
+    },
+    {
+      "linkId": "12",
+      "prefix": "12. ",
+      "text": "Which defines the class of FHIR resource?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t resourceType" },
+        { "valueString": "B.\t name" },
+        { "valueString": "C.\t valueQuantity" },
+        { "valueString": "D.\t bodySite" }
+      ]
+    },
+    {
+      "linkId": "13",
+      "prefix": "13. ",
+      "text": "Which is not the field that is generated automatically by FHIR server",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t id" },
+        { "valueString": "B.\t meta" },
+        { "valueString": "C.\t gender" },
+        { "valueString": "D.\t text" }
+      ]
+    },
+    {
+      "linkId": "14",
+      "prefix": "14. ",
+      "text": "Which category data can be recorded using FHIR Observation? (Multiple answer)",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Vital signs" },
+        { "valueString": "B.\t Patient information" },
+        { "valueString": "C.\t Medical exam report" },
+        { "valueString": "D.\t Medical imaging finding" }
+      ]
+    },
+    {
+      "linkId": "15",
+      "prefix": "15. ",
+      "text": "When the lab result is multi-valued (for example: blood pressure), which field can be used to record the lab result?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t item" },
+        { "valueString": "B.\t component" },
+        { "valueString": "C.\t subject" },
+        { "valueString": "D.\t status" }
+      ]
+    },
+    {
+      "linkId": "16",
+      "prefix": "16. ",
+      "text": "Which category data can be stored using FHIR Questionnaire? (Multiple answer)",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Device measurement data (e.g. ECG)" },
+        { "valueString": "B.\t Assessment questionnaire" },
+        { "valueString": "C.\t Case report form" },
+        { "valueString": "D.\t Family disease history" }
+      ]
+    },
+    {
+      "linkId": "17",
+      "prefix": "17. ",
+      "text": "Which FHIR Questionnaire field can be used to record questionnaire questions?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t component" },
+        { "valueString": "B.\t experimental" },
+        { "valueString": "C.\t purpose" },
+        { "valueString": "D.\t item" }
+      ]
+    },
+    {
+      "linkId": "18",
+      "prefix": "18. ",
+      "text": "Which is not an action of the FHIR API?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t HTTP DELETE (Delete)" },
+        { "valueString": "B.\t HTTP POST (Create)" },
+        { "valueString": "C.\t HTTP PUT (Update)" },
+        { "valueString": "D.\t HTTP RETRIEVE (Read)" }
+      ]
+    },
+    {
+      "linkId": "19",
+      "prefix": "19. ",
+      "text": "Which is a request API for querying male patients’ information?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t http://hapi.fhir.org/baseR4/Patient?gender=male" },
+        { "valueString": "B.\t http://hapi.fhir.org/baseR4/Patient/gender=male" },
+        { "valueString": "C.\t http://hapi.fhir.org/baseR4/Patient_gender=male" },
+        { "valueString": "D.\t http://hapi.fhir.org/baseR4/Patient.gender=male" }
+      ]
+    },
+    {
+      "linkId": "20",
+      "prefix": "20. ",
+      "text": "Which is a request API for querying a specific patient information?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t http://hapi.fhir.org/baseR4/Observation" },
+        { "valueString": "B.\t http://hapi.fhir.org/baseR4/Patient/gender=male" },
+        { "valueString": "C.\t http://hapi.fhir.org/baseR4/Patient/2508751" },
+        { "valueString": "D.\t http://hapi.fhir.org/baseR4/Patient.name=a" }
+      ]
+    },
+    {
+      "linkId": "21",
+      "prefix": "21. ",
+      "text": "What is the function of canonical URLs?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Used to record measurement result" },
+        { "valueString": "B.\t Used to record data reference link" },
+        { "valueString": "C.\t Used to record referenced FHIR resource" },
+        { "valueString": "D.\t Used to record data status" }
+      ]
+    },
+    {
+      "linkId": "22",
+      "prefix": "22. ",
+      "text": "Which FHIR Observation’s field can be used to record version creation time?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t referenceRange" },
+        { "valueString": "B.\t approvalDate" },
+        { "valueString": "C.\t issued" },
+        { "valueString": "D.\t effectiveDateTime" }
+      ]
+    },
+    {
+      "linkId": "23",
+      "prefix": "23. ",
+      "text": "Which FHIR Questionnaire’s field can be used to limit the range of  answers?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t item.text" },
+        { "valueString": "B.\t item.answerOption" },
+        { "valueString": "C.\t item.linkId" },
+        { "valueString": "D.\t item.initial" }
+      ]
+    },
+    {
+      "linkId": "24",
+      "prefix": "24. ",
+      "text": "Which is not the FHIR API HTTP operation?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t POST" },
+        { "valueString": "B.\t SEARCH" },
+        { "valueString": "C.\t PUT" },
+        { "valueString": "D.\t DELETE" }
+      ]
+    },
+    {
+      "linkId": "25",
+      "prefix": "25. ",
+      "text": "Which description of JSON is false?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t It’s a data structure" },
+        { "valueString": "B.\t (It defines a brackets () structure" },
+        { "valueString": "C.\t It defines a square brackets [] structure" },
+        { "valueString": "D.\t It defines a curly brackets {} structure" }
+      ]
+    },
+    {
+      "linkId": "26",
+      "prefix": "26. ",
+      "text": "Which resource is suitable to record the lab test value?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t LabData" },
+        { "valueString": "B.\t TestData" },
+        { "valueString": "C.\t ExamData" },
+        { "valueString": "D.\t Observation" }
+      ]
+    },
+    {
+      "linkId": "27",
+      "prefix": "27. ",
+      "text": "Which resource is suitable to record a patient's subjective statement?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Problem" },
+        { "valueString": "B.\t Complaint" },
+        { "valueString": "C.\t Observation" },
+        { "valueString": "D.\t Condition" }
+      ]
+    },
+    {
+      "linkId": "28",
+      "prefix": "28. ",
+      "text": "Which resource is suitable to record medical image finding?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Finding" },
+        { "valueString": "B.\t ExamResult" },
+        { "valueString": "C.\t Observation" },
+        { "valueString": "D.\t ImageFinding" }
+      ]
+    },
+    {
+      "linkId": "29",
+      "prefix": "29. ",
+      "text": "Which resource is suitable to record the body temperature?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t BodyTemperature" },
+        { "valueString": "B.\t Observation" },
+        { "valueString": "C.\t Condition" },
+        { "valueString": "D.\t Temperature" }
+      ]
+    },
+    {
+      "linkId": "30",
+      "prefix": "30. ",
+      "text": "The curly bracket {} of JSON contains?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Name value pair" },
+        { "valueString": "B.\t Integer" },
+        { "valueString": "C.\t array" },
+        { "valueString": "D.\t string" }
+      ]
+    },
+    {
+      "linkId": "31",
+      "prefix": "31. ",
+      "text": "Who is suitable to propose the information requirements and specifications of the medical sector?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Medical personnel" },
+        { "valueString": "B.\t Hospital IT Staff" },
+        { "valueString": "C.\t IT Company" },
+        { "valueString": "D.\t Government Ministry of Health and Welfare" }
+      ]
+    },
+    {
+      "linkId": "32",
+      "prefix": "32. ",
+      "text": "What is the MI-TW connectathon?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t FHIR organization in Taiwan" },
+        { "valueString": "B.\t Joint testing mechanism" },
+        { "valueString": "C.\t Taiwan medical standards" },
+        { "valueString": "D.\t International medical standards" }
+      ]
+    },
+    {
+      "linkId": "33",
+      "prefix": "33. ",
+      "text": "Which is the correct format for FHIR Patient.birthday?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t 2000/11/20" },
+        { "valueString": "B.\t 20001120" },
+        { "valueString": "C.\t 2000-11-20" },
+        { "valueString": "D.\t 11/20 2000" }
+      ]
+    },
+    {
+      "linkId": "34",
+      "prefix": "34. ",
+      "text": "Which line of the above codes contains an error?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t 1" },
+        { "valueString": "B.\t 2" },
+        { "valueString": "C.\t 3" },
+        { "valueString": "D.\t 4" }
+      ]
+    },
+    {
+      "linkId": "35",
+      "prefix": "35. ",
+      "text": "Which data type contains the above fields?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t ContactPoint" },
+        { "valueString": "B.\t Identifier" },
+        { "valueString": "C.\t HumanName" },
+        { "valueString": "D.\t CodeableConcept" }
+      ]
+    },
+    {
+      "linkId": "36",
+      "prefix": "36. ",
+      "text": "Which data type contains the above fields?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t ContactPoint" },
+        { "valueString": "B.\t Identifier" },
+        { "valueString": "C.\t HumanName" },
+        { "valueString": "D.\t CodeableConcept" }
+      ]
+    },
+    {
+      "linkId": "37",
+      "prefix": "37. ",
+      "text": "Which data type contains the above fields?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t ContactPoint" },
+        { "valueString": "B.\t Identifier" },
+        { "valueString": "C.\t HumanName" },
+        { "valueString": "D.\t CodeableConcept" }
+      ]
+    },
+    {
+      "linkId": "38",
+      "prefix": "38. ",
+      "text": "The above picture shows the resources of a Patient. Which is suitable to the  red rectangular blank?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Good Health Clinic" },
+        { "valueString": "B.\t Taipei city" },
+        { "valueString": "C.\t Vital Signs" },
+        { "valueString": "D.\t Organization/1254" }
+      ]
+    },
+    {
+      "linkId": "39",
+      "prefix": "39. ",
+      "text": "What is the meaning of 0..* symbol in the cardinality of a FHIR resource?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Field can be filled with no value, or one value" },
+        { "valueString": "B.\t Field can be filled with no value, one value, or multiple values" },
+        { "valueString": "C.\t Field is required to fill with one value" },
+        { "valueString": "D.\t Field is required to fill with multiple value" }
+      ]
+    },
+    {
+      "linkId": "40",
+      "prefix": "40. ",
+      "text": "What is the meaning of 0..1 symbol in the cardinality of a FHIR resource?",
+      "required": true,
+      "type": "choice",
+      "answerOption": [
+        { "valueString": "A.\t Field can be filled with no value, or one value" },
+        { "valueString": "B.\t Field can be filled with no value, one value, or multiple values" },
+        { "valueString": "C.\t Field is required to fill with one value" },
+        { "valueString": "D.\t Field is required to fill with multiple value" }
+      ]
+    }
+  ]
+}
