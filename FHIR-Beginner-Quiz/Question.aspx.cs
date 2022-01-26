@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Web.UI.WebControls;
+
 namespace FHIR_Beginner_Quiz
 {
     //public class WeatherForecast
@@ -19,6 +22,8 @@ namespace FHIR_Beginner_Quiz
         static int[] randNumbers = new int[SIZE];
         static int curIdx = 0;
         static dynamic json;
+        static string[] answers = new string[SIZE];
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["username"] = "test01";
@@ -32,24 +37,17 @@ namespace FHIR_Beginner_Quiz
                 {
                     LblWelcome.Text = "Hello, " + Session["username"].ToString() + "!<br><br>";
 
-                    //START: GET Questionnaire
+                    // START: GET Questionnaire
                     var request = (HttpWebRequest)WebRequest.Create("http://203.64.84.213:8080/fhir/Questionnaire/6902");
                     request.Accept = "application/json";
                     var response = (HttpWebResponse)request.GetResponse();
                     var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                    //END: GET Questionnaire
+                    // END: GET Questionnaire
 
-                    //Convert response to json
+                    // Convert response to json
                     json = JsonConvert.DeserializeObject(responseString);
 
                     itemLength = json["item"].Count;
-
-                    //START: populate questions array
-                    //for (int i = 0; i < itemLength; i++)
-                    //{
-                    //    Response.Write(json["item"][i].text + "<br>");
-                    //}
-                    //END: populate questions array
 
                     // START: random number for questions
                     for (int i = 0; i < randNumbers.Length; i++)
@@ -68,7 +66,6 @@ namespace FHIR_Beginner_Quiz
                     }
                     // END: random number for questions
 
-
                     DisplayQuestion();
                 }
             }
@@ -76,21 +73,56 @@ namespace FHIR_Beginner_Quiz
 
         protected void BtnNext_Click(object sender, EventArgs e)
         {
-            if (curIdx < itemLength)
+            if (curIdx == itemLength - 1 && BtnNext.Text == "Submit")
             {
-                curIdx++;
-                DisplayQuestion();
-                if (curIdx == itemLength)
+                PanelQA.Visible = false;
+                // SUBMIT EXAM
+                for (int i = 0; i < itemLength; i++)
                 {
-                    BtnNext.Text = "Submit";
+                    Response.Write((i + 1) + ". " + answers[i] + "<br>");
                 }
             }
-            else if (curIdx == itemLength)
+            else
             {
-                //SUBMIT EXAM
+                int itemIndex = randNumbers[curIdx] - 1;
+                var qItem = json["item"][itemIndex];
 
+                // START: Get student answer
+                string substr = "(Multiple answer)";
+                if (LblQuestion.Text.Contains(substr))
+                {
+                    string ans = "";
+                    List<ListItem> selected = new List<ListItem>();
+                    foreach (ListItem item in CheckBoxOptions.Items)
+                        if (item.Selected) ans += item + ", ";
+
+                    answers[itemIndex] = ans;
+                }
+                else
+                {
+                    if (RadOptions.SelectedItem != null)
+                    {
+                        answers[itemIndex] = RadOptions.SelectedItem.Text;
+                    }
+                    else
+                    {
+                        answers[itemIndex] = "----------------------------------";
+                    }
+                }
+                // END: Get student answer
+
+
+                // To next question
+                if (curIdx < itemLength - 1)
+                {
+                    curIdx++;
+                    DisplayQuestion();
+                    if (curIdx == itemLength - 1)
+                    {
+                        BtnNext.Text = "Submit";
+                    }
+                }
             }
-
         }
 
         private void DisplayQuestion()
