@@ -14,6 +14,8 @@
             <br />
             <br />
             <asp:Panel ID="PanelQA" runat="server">
+                <asp:Image ID="Image1" runat="server" />
+                <br />
                 <asp:Label ID="LblQuestion" runat="server" Text="Question"></asp:Label>
                 <asp:RadioButtonList ID="RadOptions" runat="server" Visible="False">
                     <asp:ListItem>A</asp:ListItem>

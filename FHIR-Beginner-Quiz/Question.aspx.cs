@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web.UI.WebControls;
 
 namespace FHIR_Beginner_Quiz
@@ -34,14 +36,94 @@ namespace FHIR_Beginner_Quiz
 
         }
 
-        public const string resourceType = "QuestionnaireResponse";
+        public string resourceType
+        {
+            get
+            {
+                return "QuestionnaireResponse";
+            }
+            set
+            {
+                resourceType = "QuestionnaireResponse";
+            }
+        }
 
-        public const string questionnaire = "http://203.64.84.213:8080/fhir/Questionnaire/6902";
+        //public const string questionnaire = "http://203.64.84.213:8080/fhir/Questionnaire/6902";
+        public string questionnaire
+        {
+            get
+            {
+                return "Questionnaire/6902";
+            }
+            set
+            {
+                questionnaire = "Questionnaire/6902";
+            }
+        }
         public Reference subject { get; set; }
         public string authored { get; set; }
-        public List<Item> item { get; set; }
+        public Item[] item { get; set; }
+        //public const string status = "completed";
+        public string status
+        {
+            get
+            {
+                return "completed";
+            }
+            set
+            {
+                status = "completed";
+            }
+        }
     }
 
+    public class QuestionnaireResponse2
+    {
+        public QuestionnaireResponse2()
+        {
+
+        }
+
+        public string resourceType
+        {
+            get
+            {
+                return "QuestionnaireResponse";
+            }
+            set
+            {
+                resourceType = "QuestionnaireResponse";
+            }
+        }
+
+        //public const string questionnaire = "http://203.64.84.213:8080/fhir/Questionnaire/6902";
+        public string questionnaire
+        {
+            get
+            {
+                return "Questionnaire/6902";
+            }
+            set
+            {
+                questionnaire = "Questionnaire/6902";
+            }
+        }
+        public Reference subject { get; set; }
+        public string authored { get; set; }
+        //   public Item[] item { get; set; }
+        //public const string status = "completed";
+        public string status
+        {
+            get
+            {
+                return "completed";
+            }
+            set
+            {
+                status = "completed";
+            }
+        }
+    }
     public partial class Question : System.Web.UI.Page
     {
         static int SIZE = 40;
@@ -51,9 +133,52 @@ namespace FHIR_Beginner_Quiz
         static dynamic json;
         static string[] answers = new string[SIZE];
         static QuestionnaireResponse resp = new QuestionnaireResponse();
+        static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
+
         static List<Item> listItem = new List<Item>(SIZE);
         static Item[] listIt = new Item[SIZE];
 
+        protected void Post(string respJSON)
+        {
+            //resp2.resourceType = resp.resourceType;
+            //resp2.questionnaire = resp.questionnaire;
+            //resp2.status = resp.status;
+            //resp2.authored = resp.authored;
+            //resp2.subject = resp.subject;
+            //string respJSON2 = JsonConvert.SerializeObject(resp2);
+
+
+            string url = "http://203.64.84.213:8080/fhir/QuestionnaireResponse/";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+
+            byte[] byteArray = Encoding.UTF8.GetBytes(respJSON);//要發送的字串轉為byte[]
+
+            using (Stream reqStream = request.GetRequestStream())
+            {
+                reqStream.Write(byteArray, 0, byteArray.Length);
+            }
+
+
+
+            //發出Request
+            string responseStr = "";
+            using (WebResponse response = request.GetResponse())
+            {
+
+                using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                {
+                    responseStr = reader.ReadToEnd();
+                }
+
+            }
+
+            //輸出Server端回傳字串
+            Response.Write("<br><br><br>" + responseStr);
+            Console.WriteLine(responseStr);
+        }
         protected void CreateQuestionnairerResponse()
         {
             Reference subject = new Reference()
@@ -66,41 +191,18 @@ namespace FHIR_Beginner_Quiz
             resp.subject = subject;
 
             resp.authored = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
-
-            for (int i = 0; i < answers.Length; i++)
-            {
-                Item item = new Item();
-                item.linkId = (i + 1).ToString();
-                item.text = json["item"][i].text;
-
-                // Check multiple answer
-                if (answers[i].StartsWith("Multiple"))
-                {
-                    string[] ans = answers[i].Split('#');
-                    for (int j = 1; j < ans.Length; j++)
-                    {
-                        FHIRAnswer a = new FHIRAnswer();
-                        a.valueString = ans[i].Substring(1);
-                        item.answer.Add(a);
-                    }
-                }
-                else
-                {
-                    FHIRAnswer a = new FHIRAnswer();
-                    a.valueString = answers[i];
-                    item.answer.Add(a);
-                }
-            }
+            resp.item = listIt;
 
             // Create JSON Object
             string respJSON = JsonConvert.SerializeObject(resp);
-            Response.Write(respJSON);
+            //Response.Write(respJSON);
+            Post(respJSON);
 
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["id"] = "5674";
+            Session["id"] = "5675"; //5674
             Session["name"] = "test105";
             Session["username"] = "test105@gmail.com";
 
@@ -151,71 +253,62 @@ namespace FHIR_Beginner_Quiz
 
         protected void BtnNext_Click(object sender, EventArgs e)
         {
-            if (curIdx == itemLength - 1 && BtnNext.Text == "Submit")
+
+            int itemIndex = randNumbers[curIdx] - 1;
+            var qItem = json["item"][itemIndex];
+
+            Item item = new Item();
+            item.linkId = (itemIndex + 1).ToString();
+            item.text = qItem.text;
+
+            // START: Get student answer
+            string substr = "(Multiple answer)";
+            List<FHIRAnswer> list = new List<FHIRAnswer>();
+
+            if (LblQuestion.Text.Contains(substr))
             {
-                PanelQA.Visible = false;
-                // SUBMIT EXAM
-                for (int i = 0; i < itemLength; i++)
+                foreach (ListItem i in CheckBoxOptions.Items)
                 {
-                    Response.Write((i + 1) + ". " + answers[i] + "<br>");
+                    if (i.Selected)
+                    {
+                        FHIRAnswer a = new FHIRAnswer();
+                        a.valueString = i.Text;
+                        list.Add(a);
+                    }
                 }
-                CreateQuestionnairerResponse();
             }
             else
             {
-                int itemIndex = randNumbers[curIdx] - 1;
-                var qItem = json["item"][itemIndex];
-
-                Item item = new Item();
-                item.linkId = (itemIndex + 1).ToString();
-                item.text = qItem.text;
-
-                // START: Get student answer
-                string substr = "(Multiple answer)";
-                if (LblQuestion.Text.Contains(substr))
+                FHIRAnswer a = new FHIRAnswer();
+                if (RadOptions.SelectedItem != null)
                 {
-                    List<FHIRAnswer> list = new List<FHIRAnswer>();
-                    foreach (ListItem i in CheckBoxOptions.Items)
-                    {
-                        if (i.Selected)
-                        {
-                            FHIRAnswer a = new FHIRAnswer();
-                            a.valueString = i.Text;
-                            list.Add(a);
-                        }
-                    }
-                    item.answer = list;
+
+                    a.valueString = RadOptions.SelectedItem.Text;
                 }
                 else
                 {
-                    List<FHIRAnswer> list = new List<FHIRAnswer>();
-                    FHIRAnswer a = new FHIRAnswer();
-                    if (RadOptions.SelectedItem != null)
-                    {
-
-                        a.valueString = RadOptions.SelectedItem.Text;
-                    }
-                    else
-                    {
-                        a.valueString = "----------------------------------";
-                    }
-                    list.Add(a);
-                    item.answer = list;
+                    a.valueString = "----------------------------------";
                 }
-                // END: Get student answer
-                listIt[itemIndex] = item;
-                //listItem.Insert(itemIndex, item);
+                list.Add(a);
+            }
+            item.answer = list;
+            // END: Get student answer
+            listIt[itemIndex] = item;
 
-                // To next question
-                if (curIdx < itemLength - 1)
+            // To next question
+            if (curIdx < itemLength - 1)
+            {
+                curIdx++;
+                DisplayQuestion();
+                if (curIdx == itemLength - 1)
                 {
-                    curIdx++;
-                    DisplayQuestion();
-                    if (curIdx == itemLength - 1)
-                    {
-                        BtnNext.Text = "Submit";
-                    }
+                    BtnNext.Text = "Submit";
                 }
+            }
+            else
+            {
+                PanelQA.Visible = false;
+                CreateQuestionnairerResponse();
             }
         }
 
@@ -223,6 +316,17 @@ namespace FHIR_Beginner_Quiz
         {
             int itemIndex = randNumbers[curIdx] - 1;
             var qItem = json["item"][itemIndex];
+
+            // Get question image (if any)
+            if (qItem.definition != null)
+            {
+                Image1.Visible = true;
+                Image1.ImageUrl = qItem.definition;
+            }
+            else
+            {
+                Image1.Visible = false;
+            }
 
             // Get question item
             LblQuestion.Text = (curIdx + 1).ToString() + ". " + qItem.text;
