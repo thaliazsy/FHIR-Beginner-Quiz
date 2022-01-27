@@ -1,9 +1,6 @@
 ﻿{
   "resourceType": "Questionnaire",
-  "id": "6902",
-  "url": "http://203.64.84.213:8080/fhir/Questionnaire/6902",
   "title": "Accreditation Exam for Primary System Analyst of Medical Informatics Standards",
-  "derivedFrom": [  "http://203.64.84.213:8080/fhir/Questionnaire/6915"  ],
   "status": "draft",
   "subjectType": [
     "Patient"
@@ -23,16 +20,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Fast Healthcare Internet Resource"
-        },
-        {
           "valueString": "B.\t Fast Healthcare Interoperability Resource"
-        },
-        {
-          "valueString": "C.\t Fast Healthcare Introduction Resource"
-        },
-        {
-          "valueString": "D.\t Fast Healthcare Internet Record"
         }
       ]
     },
@@ -44,16 +32,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Medical Image Standards Association of Taiwan (MISAT)"
-        },
-        {
           "valueString": "B.\t HL7 International"
-        },
-        {
-          "valueString": "C.\t Tzu Chi University"
-        },
-        {
-          "valueString": "D.\t DICOM Group"
         }
       ]
     },
@@ -64,15 +43,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t Patient"
-        },
-        {
-          "valueString": "B.\t Organization"
-        },
-        {
-          "valueString": "C.\t Observation"
-        },
         {
           "valueString": "D.\t Practice"
         }
@@ -87,15 +57,6 @@
       "answerOption": [
         {
           "valueString": "A.\t identifier"
-        },
-        {
-          "valueString": "B.\t name"
-        },
-        {
-          "valueString": "C.\t address"
-        },
-        {
-          "valueString": "D.\t id"
         }
       ]
     },
@@ -107,16 +68,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t FHIR can improve interoperability and integration of patient's data between different hospital"
-        },
-        {
-          "valueString": "B.\t FHIR is easy to implement by IT developers"
-        },
-        {
           "valueString": "C.\t FHIR equipped with high security protocol"
-        },
-        {
-          "valueString": "D.\t FHIR is flexible since FHIR data field is not fixed"
         }
       ]
     },
@@ -129,15 +81,6 @@
       "answerOption": [
         {
           "valueString": "A.\t CSV"
-        },
-        {
-          "valueString": "B.\t JSON"
-        },
-        {
-          "valueString": "C.\t XML"
-        },
-        {
-          "valueString": "D.\t REST API"
         }
       ]
     },
@@ -149,16 +92,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Patient resource can use “reference” field to link to Organization resource"
-        },
-        {
           "valueString": "B.\t All fields defined by FHIR are the searchable parameters"
-        },
-        {
-          "valueString": "C.\t FHIR is a medical information exchange standard"
-        },
-        {
-          "valueString": "D.\t FHIR resource have defined its field’s data type and restriction in a detailed document"
         }
       ]
     },
@@ -169,15 +103,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t FHIR can use HTTP Post method to create new patient information"
-        },
-        {
-          "valueString": "B.\t FHIR defines vocabulary, interoperability API, information security specifications"
-        },
-        {
-          "valueString": "C.\t The “telecom” field of FHIR Patient can store multiple mobile phone numbers or emails"
-        },
         {
           "valueString": "D.\t The “reference” field of the FHIR resource can only connect to one resource"
         }
@@ -191,16 +116,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Security"
-        },
-        {
           "valueString": "B.\t Interoperability"
-        },
-        {
-          "valueString": "C.\t Sustainability"
-        },
-        {
-          "valueString": "D.\t Responsibility"
         }
       ]
     },
@@ -211,15 +127,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t Tourism"
-        },
-        {
-          "valueString": "B.\t Business"
-        },
-        {
-          "valueString": "C.\t Law"
-        },
         {
           "valueString": "D.\t Medical"
         }
@@ -233,16 +140,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t JavaScript Observation Note"
-        },
-        {
-          "valueString": "B.\t JavaScIpt Object Notation"
-        },
-        {
           "valueString": "C.\t JavaScript Object Notation"
-        },
-        {
-          "valueString": "D.\t JavaScript Observation Notation"
         }
       ]
     },
@@ -255,15 +153,6 @@
       "answerOption": [
         {
           "valueString": "A.\t resourceType"
-        },
-        {
-          "valueString": "B.\t name"
-        },
-        {
-          "valueString": "C.\t valueQuantity"
-        },
-        {
-          "valueString": "D.\t bodySite"
         }
       ]
     },
@@ -275,16 +164,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t id"
-        },
-        {
-          "valueString": "B.\t meta"
-        },
-        {
           "valueString": "C.\t gender"
-        },
-        {
-          "valueString": "D.\t text"
         }
       ]
     },
@@ -296,16 +176,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Vital signs"
-        },
-        {
           "valueString": "B.\t Patient information"
-        },
-        {
-          "valueString": "C.\t Medical exam report"
-        },
-        {
-          "valueString": "D.\t Medical imaging finding"
         }
       ]
     },
@@ -317,16 +188,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t item"
-        },
-        {
           "valueString": "B.\t component"
-        },
-        {
-          "valueString": "C.\t subject"
-        },
-        {
-          "valueString": "D.\t status"
         }
       ]
     },
@@ -339,15 +201,6 @@
       "answerOption": [
         {
           "valueString": "A.\t Device measurement data (e.g. ECG)"
-        },
-        {
-          "valueString": "B.\t Assessment questionnaire"
-        },
-        {
-          "valueString": "C.\t Case report form"
-        },
-        {
-          "valueString": "D.\t Family disease history"
         }
       ]
     },
@@ -358,15 +211,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t component"
-        },
-        {
-          "valueString": "B.\t experimental"
-        },
-        {
-          "valueString": "C.\t purpose"
-        },
         {
           "valueString": "D.\t item"
         }
@@ -379,15 +223,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t HTTP DELETE (Delete)"
-        },
-        {
-          "valueString": "B.\t HTTP POST (Create)"
-        },
-        {
-          "valueString": "C.\t HTTP PUT (Update)"
-        },
         {
           "valueString": "D.\t HTTP RETRIEVE (Read)"
         }
@@ -402,15 +237,6 @@
       "answerOption": [
         {
           "valueString": "A.\t http://hapi.fhir.org/baseR4/Patient?gender=male"
-        },
-        {
-          "valueString": "B.\t http://hapi.fhir.org/baseR4/Patient/gender=male"
-        },
-        {
-          "valueString": "C.\t http://hapi.fhir.org/baseR4/Patient_gender=male"
-        },
-        {
-          "valueString": "D.\t http://hapi.fhir.org/baseR4/Patient.gender=male"
         }
       ]
     },
@@ -422,16 +248,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t http://hapi.fhir.org/baseR4/Observation"
-        },
-        {
-          "valueString": "B.\t http://hapi.fhir.org/baseR4/Patient/gender=male"
-        },
-        {
           "valueString": "C.\t http://hapi.fhir.org/baseR4/Patient/2508751"
-        },
-        {
-          "valueString": "D.\t http://hapi.fhir.org/baseR4/Patient.name=a"
         }
       ]
     },
@@ -443,16 +260,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Used to record measurement result"
-        },
-        {
           "valueString": "B.\t Used to record data reference link"
-        },
-        {
-          "valueString": "C.\t Used to record referenced FHIR resource"
-        },
-        {
-          "valueString": "D.\t Used to record data status"
         }
       ]
     },
@@ -464,16 +272,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t referenceRange"
-        },
-        {
-          "valueString": "B.\t approvalDate"
-        },
-        {
           "valueString": "C.\t issued"
-        },
-        {
-          "valueString": "D.\t effectiveDateTime"
         }
       ]
     },
@@ -485,16 +284,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t item.text"
-        },
-        {
           "valueString": "B.\t item.answerOption"
-        },
-        {
-          "valueString": "C.\t item.linkId"
-        },
-        {
-          "valueString": "D.\t item.initial"
         }
       ]
     },
@@ -506,16 +296,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t POST"
-        },
-        {
           "valueString": "B.\t SEARCH"
-        },
-        {
-          "valueString": "C.\t PUT"
-        },
-        {
-          "valueString": "D.\t DELETE"
         }
       ]
     },
@@ -527,16 +308,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t It’s a data structure"
-        },
-        {
           "valueString": "B.\t (It defines a brackets () structure"
-        },
-        {
-          "valueString": "C.\t It defines a square brackets [] structure"
-        },
-        {
-          "valueString": "D.\t It defines a curly brackets {} structure"
         }
       ]
     },
@@ -547,15 +319,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t LabData"
-        },
-        {
-          "valueString": "B.\t TestData"
-        },
-        {
-          "valueString": "C.\t ExamData"
-        },
         {
           "valueString": "D.\t Observation"
         }
@@ -569,15 +332,6 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Problem"
-        },
-        {
-          "valueString": "B.\t Complaint"
-        },
-        {
-          "valueString": "C.\t Observation"
-        },
-        {
           "valueString": "D.\t Condition"
         }
       ]
@@ -590,16 +344,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Finding"
-        },
-        {
-          "valueString": "B.\t ExamResult"
-        },
-        {
           "valueString": "C.\t Observation"
-        },
-        {
-          "valueString": "D.\t ImageFinding"
         }
       ]
     },
@@ -611,16 +356,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t BodyTemperature"
-        },
-        {
           "valueString": "B.\t Observation"
-        },
-        {
-          "valueString": "C.\t Condition"
-        },
-        {
-          "valueString": "D.\t Temperature"
         }
       ]
     },
@@ -633,15 +369,6 @@
       "answerOption": [
         {
           "valueString": "A.\t Name value pair"
-        },
-        {
-          "valueString": "B.\t Integer"
-        },
-        {
-          "valueString": "C.\t array"
-        },
-        {
-          "valueString": "D.\t string"
         }
       ]
     },
@@ -654,15 +381,6 @@
       "answerOption": [
         {
           "valueString": "A.\t Medical personnel"
-        },
-        {
-          "valueString": "B.\t Hospital IT Staff"
-        },
-        {
-          "valueString": "C.\t IT Company"
-        },
-        {
-          "valueString": "D.\t Government Ministry of Health and Welfare"
         }
       ]
     },
@@ -674,16 +392,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t FHIR organization in Taiwan"
-        },
-        {
           "valueString": "B.\t Joint testing mechanism"
-        },
-        {
-          "valueString": "C.\t Taiwan medical standards"
-        },
-        {
-          "valueString": "D.\t International medical standards"
         }
       ]
     },
@@ -695,16 +404,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t 2000/11/20"
-        },
-        {
-          "valueString": "B.\t 20001120"
-        },
-        {
           "valueString": "C.\t 2000-11-20"
-        },
-        {
-          "valueString": "D.\t 11/20 2000"
         }
       ]
     },
@@ -717,16 +417,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t 1"
-        },
-        {
           "valueString": "B.\t 2"
-        },
-        {
-          "valueString": "C.\t 3"
-        },
-        {
-          "valueString": "D.\t 4"
         }
       ]
     },
@@ -739,16 +430,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t ContactPoint"
-        },
-        {
-          "valueString": "B.\t Identifier"
-        },
-        {
           "valueString": "C.\t HumanName"
-        },
-        {
-          "valueString": "D.\t CodeableConcept"
         }
       ]
     },
@@ -762,15 +444,6 @@
       "answerOption": [
         {
           "valueString": "A.\t ContactPoint"
-        },
-        {
-          "valueString": "B.\t Identifier"
-        },
-        {
-          "valueString": "C.\t HumanName"
-        },
-        {
-          "valueString": "D.\t CodeableConcept"
         }
       ]
     },
@@ -782,15 +455,6 @@
       "type": "choice",
       "required": true,
       "answerOption": [
-        {
-          "valueString": "A.\t ContactPoint"
-        },
-        {
-          "valueString": "B.\t Identifier"
-        },
-        {
-          "valueString": "C.\t HumanName"
-        },
         {
           "valueString": "D.\t CodeableConcept"
         }
@@ -805,15 +469,6 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Good Health Clinic"
-        },
-        {
-          "valueString": "B.\t Taipei city"
-        },
-        {
-          "valueString": "C.\t Vital Signs"
-        },
-        {
           "valueString": "D.\t Organization/1254"
         }
       ]
@@ -827,16 +482,7 @@
       "required": true,
       "answerOption": [
         {
-          "valueString": "A.\t Field can be filled with no value, or one value"
-        },
-        {
           "valueString": "B.\t Field can be filled with no value, one value, or multiple values"
-        },
-        {
-          "valueString": "C.\t Field is required to fill with one value"
-        },
-        {
-          "valueString": "D.\t Field is required to fill with multiple value"
         }
       ]
     },
@@ -850,15 +496,6 @@
       "answerOption": [
         {
           "valueString": "A.\t Field can be filled with no value, or one value"
-        },
-        {
-          "valueString": "B.\t Field can be filled with no value, one value, or multiple values"
-        },
-        {
-          "valueString": "C.\t Field is required to fill with one value"
-        },
-        {
-          "valueString": "D.\t Field is required to fill with multiple value"
         }
       ]
     }

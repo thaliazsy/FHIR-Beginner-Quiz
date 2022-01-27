@@ -132,7 +132,7 @@ namespace FHIR_Beginner_Quiz
         static string filePath;
         static string patientRef;
         static readonly QuestionnaireResponse resp = new QuestionnaireResponse();
-        static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
+        static QuestionnaireResponse resp2 = new QuestionnaireResponse();
 
         //static List<Item> listItem = new List<Item>(SIZE);
         static Item[] listItem = new Item[SIZE];
@@ -175,9 +175,48 @@ namespace FHIR_Beginner_Quiz
             //輸出Server端回傳字串
             Response.Write("<br><br><br>" + responseStr);
             Console.WriteLine(responseStr);
+
+            dynamic resp2= JsonConvert.DeserializeObject(responseStr);
+            Session["quesRespId"]= resp2["id"];
         }
         protected void CreateQuestionnaireResponse()
         {
+            string randStr, answerstr;
+            int count = 0;
+
+            using (StreamReader sr = File.OpenText("D:/Patient/5675.txt"))//filePath
+            {
+                randStr = sr.ReadLine();        //line 1 itu angka random
+                // START: Get student answer
+                
+
+                while (!sr.EndOfStream) //ini buat count ada brp bnyk jawaban per tiap soal=1 item gasih? iya
+                {
+                    List<FHIRAnswer> list = new List<FHIRAnswer>(); //yep
+                    int itemIndex = randNumbers[count] - 1;
+                    var qItem = json["item"][itemIndex];
+
+                    Item item = new Item
+                    {
+                        linkId = (itemIndex + 1).ToString(),
+                        text = qItem.text
+                    };
+
+                    answerstr = sr.ReadLine();
+                    string[] answer = answerstr.Split('#'); //answer
+                    FHIRAnswer a = new FHIRAnswer()
+                    {
+                        valueString = answer[1]
+                    };
+                    list.Add(a);
+                    count++;
+                item.answer = list;
+                listItem[itemIndex] = item;
+                }
+                // END: Get student answer
+            }
+
+
             Reference subject = new Reference()
             {
                 reference = patientRef,
@@ -197,6 +236,34 @@ namespace FHIR_Beginner_Quiz
 
         }
 
+        protected int CheckFinish()
+        {
+            string randStr;
+
+            int count = 0;
+            if (File.Exists("D:/Patient/5675.txt"))
+            {
+                using (StreamReader sr = File.OpenText("D:/Patient/5675.txt"))//filePath
+                {
+                    randStr = sr.ReadLine();        //line 1 itu angka random
+
+                    while (!sr.EndOfStream) //ini buat count ada brp bnyk jawaban
+                    {
+                        sr.ReadLine();
+                        count++;
+                    }
+                    string[] arr = randStr.Split('#'); //Random list number
+                    for (int i = 1; i < arr.Length; i++)
+                    {
+                        randNumbers[i - 1] = Int32.Parse(arr[i]);
+                    }
+
+                }
+            }
+
+            return count;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["id"] = "5674"; //person id=5674
@@ -207,7 +274,8 @@ namespace FHIR_Beginner_Quiz
             if (DateTime.Now >= xx)
             {
                 CreateQuestionnaireResponse();
-                Session.RemoveAll();
+                //Session.RemoveAll();
+                Response.Redirect("Score.aspx");
             }
             if (Session["username"] == null)
             {
@@ -242,37 +310,47 @@ namespace FHIR_Beginner_Quiz
 
                     itemLength = json["item"].Count;
 
-                    // START: random number for questions
-                    for (int i = 0; i < randNumbers.Length; i++)
-                    {
-                        randNumbers[i] = i + 1;
-                    }
-                    Random rd = new Random();
-                    int rand;
-                    int temp;
-                    for (int i = 0; i < SIZE; i++)
-                    {
-                        rand = rd.Next(1, SIZE - i);
-                        temp = randNumbers[rand];
-                        randNumbers[rand] = randNumbers[SIZE - 1 - i];
-                        randNumbers[SIZE - 1 - i] = temp;
-                    }
-                    // END: random number for questions
 
-                    DisplayQuestion();
-
-                    string randStr = "";
-                    for (int i = 0; i < randNumbers.Length; i++)
-                    {
-                        randStr += "#" + randNumbers[i].ToString();
-                    }
-
+                    // Get student answer file and check whether finish answering
                     filePath = "D:/" + patientRef + ".txt";
-                    // Write student answer to file
-                    using (StreamWriter sw = File.CreateText(filePath))
+                    curIdx = CheckFinish(); //kalo pertama kali curidnya bakal 1? 0 hrusnya
+                    if (curIdx == 0)     // blm ada file
                     {
-                        sw.WriteLine(randStr);
+                        // START: random number for questions
+                        for (int i = 0; i < randNumbers.Length; i++)
+                        {
+                            randNumbers[i] = i + 1;
+                        }
+                        Random rd = new Random();
+                        int rand;
+                        int temp;
+                        for (int i = 0; i < SIZE; i++)
+                        {
+                            rand = rd.Next(1, SIZE - i);
+                            temp = randNumbers[rand];
+                            randNumbers[rand] = randNumbers[SIZE - 1 - i];
+                            randNumbers[SIZE - 1 - i] = temp;
+                        }
+                        // END: random number for questions
+
+                        string randStr = "";
+                        for (int i = 0; i < randNumbers.Length; i++)
+                        {
+                            randStr += "#" + randNumbers[i].ToString();
+                        }
+
+
+                        // Write student answer to file
+                        using (StreamWriter sw = File.CreateText(filePath))
+                        {
+                            sw.WriteLine(randStr);
+                        }
                     }
+                    else if(curIdx >= 40)
+                    {
+                        Response.Redirect("Score.aspx");
+                    }
+                    DisplayQuestion();
                 }
             }
         }
@@ -280,35 +358,17 @@ namespace FHIR_Beginner_Quiz
         protected void BtnNext_Click(object sender, EventArgs e)
         {
             int itemIndex = randNumbers[curIdx] - 1;
-            var qItem = json["item"][itemIndex];
 
-            Item item = new Item
-            {
-                linkId = (itemIndex + 1).ToString(),
-                text = qItem.text
-            };
-
-            // START: Get student answer
-            List<FHIRAnswer> list = new List<FHIRAnswer>();
-
-            FHIRAnswer a = new FHIRAnswer();
+            string ans = "---";
             if (RadOptions.SelectedItem != null)
             {
-                a.valueString = RadOptions.SelectedItem.Text;
+                ans = RadOptions.SelectedItem.Text;
             }
-            else
-            {
-                a.valueString = "---";
-            }
-            list.Add(a);
-            item.answer = list;
-            listItem[itemIndex] = item;
-            // END: Get student answer
 
             // Write student answer to file
             using (StreamWriter sw = File.AppendText(filePath))
             {
-                sw.WriteLine((itemIndex + 1).ToString() + "#" + a.valueString);
+                sw.WriteLine((itemIndex + 1).ToString() + "#" + ans);
             }
 
             // To next question
@@ -325,12 +385,13 @@ namespace FHIR_Beginner_Quiz
             {
                 PanelQA.Visible = false;
                 CreateQuestionnaireResponse();
+                Response.Redirect("Score.aspx");
             }
         }
 
         private void DisplayQuestion()
         {
-            int itemIndex = randNumbers[curIdx] - 1;
+            int itemIndex = randNumbers[curIdx] - 1;    //krn udah jawab40 soal, curidx=40, max kam 39 , klob udrah 40 artinya ga boleh kerjain lg ga sih iya lgsung ke nilai
             var qItem = json["item"][itemIndex];
 
             // Get question image (if any)
