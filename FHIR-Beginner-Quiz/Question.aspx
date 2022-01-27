@@ -8,10 +8,32 @@
     <title></title>
 </head>
 <body>
+    <script type="text/javascript">
+        var countDownDate = new Date("Jan 29, 2022 12:00:00").getTime();
+
+        var myfunc = setInterval(function () {
+            var now = new Date().getTime();
+            var timeleft = countDownDate - now;
+
+            // Calculating the minutes and seconds left
+            var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+            // Result is output to the specific element
+            document.getElementById("mins").innerHTML = minutes + "m ";
+            document.getElementById("secs").innerHTML = seconds + "s ";
+        }, 1000);
+    </script>
+
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="LblWelcome" runat="server" Text="Hello!"></asp:Label>
             <br />
+            <div id="timer">
+                This is only valid for the next
+                <div id="mins" style="display: inline"></div>
+                <div id="secs" style="display: inline"></div>
+            </div>
             <br />
             <asp:Panel ID="PanelQA" runat="server">
                 <asp:Image ID="Image1" runat="server" />
