@@ -128,6 +128,7 @@ namespace FHIR_Beginner_Quiz
         static readonly int[] randNumbers = new int[SIZE];
         static int curIdx = 0;
         static dynamic json;
+        static dynamic personJSON;
         static readonly QuestionnaireResponse resp = new QuestionnaireResponse();
         static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
 
@@ -177,7 +178,7 @@ namespace FHIR_Beginner_Quiz
         {
             Reference subject = new Reference()
             {
-                reference = "Patient/" + Session["id"].ToString(),
+                reference = personJSON["link"][0].reference,
                 type = "Patient",
                 display = Session["name"].ToString()
 
@@ -216,15 +217,25 @@ namespace FHIR_Beginner_Quiz
                 {
                     LblWelcome.Text = "Hello, " + Session["name"].ToString() + "!<br><br>";
 
-                    // START: GET Questionnaire
-                    var request = (HttpWebRequest)WebRequest.Create("http://203.64.84.213:8080/fhir/Questionnaire/6902");
+                    // START: GET Person
+                    var request = (HttpWebRequest)WebRequest.Create("http://203.64.84.213:8080/fhir/Person/" + Session["id"].ToString());
                     request.Accept = "application/json";
+
                     var response = (HttpWebResponse)request.GetResponse();
                     var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                    // END: GET Questionnaire
+                    // Convert response to json
+                    personJSON = JsonConvert.DeserializeObject(responseString);
+                    // END: GET Person
+
+                    // START: GET Questionnaire
+                    request = (HttpWebRequest)WebRequest.Create("http://203.64.84.213:8080/fhir/Questionnaire/6902");
+                    request.Accept = "application/json";
+                    response = (HttpWebResponse)request.GetResponse();
+                    responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
                     // Convert response to json
                     json = JsonConvert.DeserializeObject(responseString);
+                    // END: GET Questionnaire
 
                     itemLength = json["item"].Count;
 
