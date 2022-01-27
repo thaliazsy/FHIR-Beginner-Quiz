@@ -128,7 +128,6 @@ namespace FHIR_Beginner_Quiz
         static readonly int[] randNumbers = new int[SIZE];
         static int curIdx = 0;
         static dynamic json;
-        static string[] answers = new string[SIZE];
         static readonly QuestionnaireResponse resp = new QuestionnaireResponse();
         static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
 
@@ -200,8 +199,13 @@ namespace FHIR_Beginner_Quiz
             Session["id"] = "5674"; //person id=5674
             Session["name"] = "test105";
             Session["username"] = "test105@gmail.com";
+            var xx = new DateTime(2022, 01, 29, 12, 00, 00);
 
-
+            if (DateTime.Now >= xx)
+            {
+                CreateQuestionnaireResponse();
+                Session.RemoveAll();
+            }
             if (Session["username"] == null)
             {
                 Response.Redirect("http://203.64.84.150:51888/user4/course/FHIRbeginner_IT/login.html");
