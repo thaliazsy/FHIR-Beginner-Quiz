@@ -129,6 +129,7 @@ namespace FHIR_Beginner_Quiz
         static int curIdx = 0;
         static dynamic json;
         static dynamic personJSON;
+        static string filePath;
         static readonly QuestionnaireResponse resp = new QuestionnaireResponse();
         static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
 
@@ -257,6 +258,19 @@ namespace FHIR_Beginner_Quiz
                     // END: random number for questions
 
                     DisplayQuestion();
+
+                    string randStr = "";
+                    for(int i=0;i< randNumbers.Length; i++)
+                    {
+                        randStr+= "#" + randNumbers[i].ToString();
+                    }
+
+                    filePath = "D:/" + personJSON["link"][0]["target"]["reference"] + ".txt";
+                    // Write student answer to file
+                    using (StreamWriter sw = File.CreateText(filePath))
+                    {
+                        sw.WriteLine(randStr);
+                    }
                 }
             }
         }
@@ -288,6 +302,12 @@ namespace FHIR_Beginner_Quiz
             item.answer = list;
             listItem[itemIndex] = item;
             // END: Get student answer
+
+            // Write student answer to file
+            using (StreamWriter sw = File.AppendText(filePath))
+            {
+                sw.WriteLine((itemIndex+1).ToString() + "#" + a.valueString);
+            }
 
             // To next question
             if (curIdx < itemLength - 1)
