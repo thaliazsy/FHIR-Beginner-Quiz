@@ -184,7 +184,7 @@ namespace FHIR_Beginner_Quiz
             string randStr, answerstr;
             int count = 0;
 
-            using (StreamReader sr = File.OpenText("D:/Patient/5675.txt"))//filePath
+            using (StreamReader sr = File.OpenText(filePath))//filePath
             {
                 randStr = sr.ReadLine();        //line 1 itu angka random
                 // START: Get student answer
@@ -241,9 +241,9 @@ namespace FHIR_Beginner_Quiz
             string randStr;
 
             int count = 0;
-            if (File.Exists("D:/Patient/5675.txt"))
+            if (File.Exists(filePath))
             {
-                using (StreamReader sr = File.OpenText("D:/Patient/5675.txt"))//filePath
+                using (StreamReader sr = File.OpenText(filePath))//filePath
                 {
                     randStr = sr.ReadLine();        //line 1 itu angka random
 
