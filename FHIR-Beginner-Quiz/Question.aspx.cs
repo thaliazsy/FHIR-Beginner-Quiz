@@ -3,13 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Web.UI.WebControls;
 
 namespace FHIR_Beginner_Quiz
 {
-
     public class FHIRAnswer
     {
         public string valueString { get; set; }
@@ -126,17 +123,17 @@ namespace FHIR_Beginner_Quiz
     }
     public partial class Question : System.Web.UI.Page
     {
-        static int SIZE = 40;
+        static readonly int SIZE = 40;
         static int itemLength = 0;
-        static int[] randNumbers = new int[SIZE];
+        static readonly int[] randNumbers = new int[SIZE];
         static int curIdx = 0;
         static dynamic json;
         static string[] answers = new string[SIZE];
-        static QuestionnaireResponse resp = new QuestionnaireResponse();
+        static readonly QuestionnaireResponse resp = new QuestionnaireResponse();
         static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
 
-        static List<Item> listItem = new List<Item>(SIZE);
-        static Item[] listIt = new Item[SIZE];
+        //static List<Item> listItem = new List<Item>(SIZE);
+        static Item[] listItem = new Item[SIZE];
 
         protected void Post(string respJSON)
         {
@@ -161,8 +158,6 @@ namespace FHIR_Beginner_Quiz
                 reqStream.Write(byteArray, 0, byteArray.Length);
             }
 
-
-
             //發出Request
             string responseStr = "";
             using (WebResponse response = request.GetResponse())
@@ -179,7 +174,7 @@ namespace FHIR_Beginner_Quiz
             Response.Write("<br><br><br>" + responseStr);
             Console.WriteLine(responseStr);
         }
-        protected void CreateQuestionnairerResponse()
+        protected void CreateQuestionnaireResponse()
         {
             Reference subject = new Reference()
             {
@@ -191,7 +186,7 @@ namespace FHIR_Beginner_Quiz
             resp.subject = subject;
 
             resp.authored = DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
-            resp.item = listIt;
+            resp.item = listItem;
 
             // Create JSON Object
             string respJSON = JsonConvert.SerializeObject(resp);
@@ -202,7 +197,7 @@ namespace FHIR_Beginner_Quiz
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["id"] = "5675"; //5674
+            Session["id"] = "5674"; //person id=5674
             Session["name"] = "test105";
             Session["username"] = "test105@gmail.com";
 
@@ -235,7 +230,7 @@ namespace FHIR_Beginner_Quiz
                         randNumbers[i] = i + 1;
                     }
                     Random rd = new Random();
-                    int rand = 0;
+                    int rand;
                     int temp;
                     for (int i = 0; i < SIZE; i++)
                     {
@@ -253,47 +248,31 @@ namespace FHIR_Beginner_Quiz
 
         protected void BtnNext_Click(object sender, EventArgs e)
         {
-
             int itemIndex = randNumbers[curIdx] - 1;
             var qItem = json["item"][itemIndex];
 
-            Item item = new Item();
-            item.linkId = (itemIndex + 1).ToString();
-            item.text = qItem.text;
+            Item item = new Item
+            {
+                linkId = (itemIndex + 1).ToString(),
+                text = qItem.text
+            };
 
             // START: Get student answer
-            string substr = "(Multiple answer)";
             List<FHIRAnswer> list = new List<FHIRAnswer>();
 
-            if (LblQuestion.Text.Contains(substr))
+            FHIRAnswer a = new FHIRAnswer();
+            if (RadOptions.SelectedItem != null)
             {
-                foreach (ListItem i in CheckBoxOptions.Items)
-                {
-                    if (i.Selected)
-                    {
-                        FHIRAnswer a = new FHIRAnswer();
-                        a.valueString = i.Text;
-                        list.Add(a);
-                    }
-                }
+                a.valueString = RadOptions.SelectedItem.Text;
             }
             else
             {
-                FHIRAnswer a = new FHIRAnswer();
-                if (RadOptions.SelectedItem != null)
-                {
-
-                    a.valueString = RadOptions.SelectedItem.Text;
-                }
-                else
-                {
-                    a.valueString = "----------------------------------";
-                }
-                list.Add(a);
+                a.valueString = "---";
             }
+            list.Add(a);
             item.answer = list;
+            listItem[itemIndex] = item;
             // END: Get student answer
-            listIt[itemIndex] = item;
 
             // To next question
             if (curIdx < itemLength - 1)
@@ -308,7 +287,7 @@ namespace FHIR_Beginner_Quiz
             else
             {
                 PanelQA.Visible = false;
-                CreateQuestionnairerResponse();
+                CreateQuestionnaireResponse();
             }
         }
 
@@ -331,29 +310,15 @@ namespace FHIR_Beginner_Quiz
             // Get question item
             LblQuestion.Text = (curIdx + 1).ToString() + ". " + qItem.text;
 
-            // Get answer options
+            // Get & display answer options
             string[] options = new string[qItem["answerOption"].Count];
             for (int i = 0; i < qItem["answerOption"].Count; i++)
             {
                 options[i] = qItem["answerOption"][i].valueString;
             }
-
-            // Single answer or multiple answer
-            string substr = "(Multiple answer)";
-            if (LblQuestion.Text.Contains(substr))
-            {
-                RadOptions.Visible = false;
-                CheckBoxOptions.DataSource = options;
-                CheckBoxOptions.DataBind();
-                CheckBoxOptions.Visible = true;
-            }
-            else
-            {
-                CheckBoxOptions.Visible = false;
-                RadOptions.DataSource = options;
-                RadOptions.DataBind();
-                RadOptions.Visible = true;
-            }
+            RadOptions.DataSource = options;
+            RadOptions.DataBind();
         }
+
     }
 }

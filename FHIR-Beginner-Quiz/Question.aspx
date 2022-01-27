@@ -39,18 +39,12 @@
                 <asp:Image ID="Image1" runat="server" />
                 <br />
                 <asp:Label ID="LblQuestion" runat="server" Text="Question"></asp:Label>
-                <asp:RadioButtonList ID="RadOptions" runat="server" Visible="False">
+                <asp:RadioButtonList ID="RadOptions" runat="server">
                     <asp:ListItem>A</asp:ListItem>
                     <asp:ListItem>B</asp:ListItem>
                     <asp:ListItem>C</asp:ListItem>
                     <asp:ListItem>D</asp:ListItem>
                 </asp:RadioButtonList>
-                <asp:CheckBoxList ID="CheckBoxOptions" runat="server" Visible="False">
-                    <asp:ListItem>A</asp:ListItem>
-                    <asp:ListItem>B</asp:ListItem>
-                    <asp:ListItem>C</asp:ListItem>
-                    <asp:ListItem>D</asp:ListItem>
-                </asp:CheckBoxList>
                 <asp:Button ID="BtnNext" runat="server" Text="Next" OnClick="BtnNext_Click" />
             </asp:Panel>
 
