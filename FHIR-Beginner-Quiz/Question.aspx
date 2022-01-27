@@ -29,13 +29,13 @@
         <div>
             <asp:Label ID="LblWelcome" runat="server" Text="Hello!"></asp:Label>
             <br />
-            <div id="timer">
-                This is only valid for the next
-                <div id="mins" style="display: inline"></div>
-                <div id="secs" style="display: inline"></div>
-            </div>
-            <br />
             <asp:Panel ID="PanelQA" runat="server">
+                <div id="timer">
+                    This is only valid for the next
+                <div id="mins" style="display: inline"></div>
+                    <div id="secs" style="display: inline"></div>
+                </div>
+                <br />
                 <asp:Image ID="Image1" runat="server" />
                 <br />
                 <asp:Label ID="LblQuestion" runat="server" Text="Question"></asp:Label>

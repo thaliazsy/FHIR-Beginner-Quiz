@@ -130,6 +130,7 @@ namespace FHIR_Beginner_Quiz
         static dynamic json;
         static dynamic personJSON;
         static string filePath;
+        static string patientRef;
         static readonly QuestionnaireResponse resp = new QuestionnaireResponse();
         static QuestionnaireResponse2 resp2 = new QuestionnaireResponse2();
 
@@ -179,7 +180,7 @@ namespace FHIR_Beginner_Quiz
         {
             Reference subject = new Reference()
             {
-                reference = personJSON["link"][0].reference,
+                reference = patientRef,
                 type = "Patient",
                 display = Session["name"].ToString()
 
@@ -216,7 +217,7 @@ namespace FHIR_Beginner_Quiz
             {
                 if (!Page.IsPostBack)
                 {
-                    LblWelcome.Text = "Hello, " + Session["name"].ToString() + "!<br><br>";
+                    LblWelcome.Text = "Hello, " + Session["name"].ToString() + "!<br>";
 
                     // START: GET Person
                     var request = (HttpWebRequest)WebRequest.Create("http://203.64.84.213:8080/fhir/Person/" + Session["id"].ToString());
@@ -226,6 +227,7 @@ namespace FHIR_Beginner_Quiz
                     var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
                     // Convert response to json
                     personJSON = JsonConvert.DeserializeObject(responseString);
+                    patientRef = personJSON["link"][0]["target"]["reference"];
                     // END: GET Person
 
                     // START: GET Questionnaire
@@ -260,12 +262,12 @@ namespace FHIR_Beginner_Quiz
                     DisplayQuestion();
 
                     string randStr = "";
-                    for(int i=0;i< randNumbers.Length; i++)
+                    for (int i = 0; i < randNumbers.Length; i++)
                     {
-                        randStr+= "#" + randNumbers[i].ToString();
+                        randStr += "#" + randNumbers[i].ToString();
                     }
 
-                    filePath = "D:/" + personJSON["link"][0]["target"]["reference"] + ".txt";
+                    filePath = "D:/" + patientRef + ".txt";
                     // Write student answer to file
                     using (StreamWriter sw = File.CreateText(filePath))
                     {
@@ -306,7 +308,7 @@ namespace FHIR_Beginner_Quiz
             // Write student answer to file
             using (StreamWriter sw = File.AppendText(filePath))
             {
-                sw.WriteLine((itemIndex+1).ToString() + "#" + a.valueString);
+                sw.WriteLine((itemIndex + 1).ToString() + "#" + a.valueString);
             }
 
             // To next question
@@ -354,6 +356,5 @@ namespace FHIR_Beginner_Quiz
             RadOptions.DataSource = options;
             RadOptions.DataBind();
         }
-
     }
 }
